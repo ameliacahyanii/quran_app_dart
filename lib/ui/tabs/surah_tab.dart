@@ -32,7 +32,7 @@ class SurahTab extends StatelessWidget {
   
   Container _surahItem({required Surah surah}) => Container(
     child: Text(
-      'RPL',
+      'Al-Fatihah',
       style: GoogleFonts.poppins(color: Colors.black),
     )
   );
