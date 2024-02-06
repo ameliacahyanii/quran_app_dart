@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quran_app/global.dart';
+import 'package:quran_app/ui/tabs/hijb_tab.dart';
+import 'package:quran_app/ui/tabs/page_tab.dart';
+import 'package:quran_app/ui/tabs/para_tab.dart';
+import 'package:quran_app/ui/tabs/surah_tab.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,8 +19,69 @@ class HomeScreen extends StatelessWidget {
       body: DefaultTabController(
         length: 4, // Total amount pages that we want to display
         child: Padding (
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: _salam()
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: NestedScrollView(
+                headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) => [
+                  SliverToBoxAdapter(
+                    child: _salam() // No need coma; coma only for object
+                  ),
+                  SliverAppBar( // SAP App bar
+                    automaticallyImplyLeading: false, // Hide the detault button (back button)
+                    elevation: 0,
+                    pinned: true, // Make it sticky
+                    shape: Border(
+                      bottom: BorderSide(
+                        width: 2,
+                        color: primary.withOpacity(.1),
+                      )
+                    ),
+                    bottom: PreferredSize(
+                      preferredSize: const Size.fromHeight(0),
+                      child: _tab(),
+                    ),
+                  ),
+                ],
+                body: const TabBarView(
+                  children: [
+                    SurahTab(),
+                    ParaTab(),
+                    PageTab(),
+                    HijbTab()
+                  ],
+                )
+            ),
+        ),
+      ),
+    );
+  }
+
+  TabBar _tab() {
+    return TabBar(
+      tabs: [
+        _tabItem(label: 'Surah'),
+        _tabItem(label: 'Para'),
+        _tabItem(label: 'Page'),
+        _tabItem(label: 'Hijb'),
+      ],
+      indicator: UnderlineTabIndicator(
+        borderSide:
+        BorderSide(
+            width: 5,
+            color: primary,
+        ),
+        insets: EdgeInsets.symmetric(horizontal: 60),
+      ),
+    );
+  }
+
+  Tab _tabItem({required String label}) {
+    return Tab(
+
+      child: Text(
+        label,
+        style: GoogleFonts.poppins(
+          fontSize: 16,
+          fontWeight: FontWeight.w500
         ),
       ),
     );
@@ -134,7 +199,7 @@ class HomeScreen extends StatelessWidget {
             onPressed: (() => {}),
             icon: SvgPicture.asset('/svg/menu_icon.svg')
         ),
-        SizedBox( // Padding antar elenent
+        const SizedBox( // Padding antar elenent
           width: 24,
         ),
         Text(
