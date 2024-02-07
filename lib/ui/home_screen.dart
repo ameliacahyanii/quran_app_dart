@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                     child: _salam() // No need coma; coma only for object
                   ),
                   SliverAppBar( // SAP App bar
-                    automaticallyImplyLeading: false, // Hide the detault button (back button)
+                    automaticallyImplyLeading: false, // Hide the default button (back button)
                     elevation: 0,
                     pinned: true, // Make it sticky
                     shape: Border(
@@ -105,7 +105,7 @@ class HomeScreen extends StatelessWidget {
           Text(
             'Amelia Cahyani',
             style: GoogleFonts.poppins(
-              color: title,
+              color: text,
               fontWeight: FontWeight.w600,
               fontSize: 24,
             ),
