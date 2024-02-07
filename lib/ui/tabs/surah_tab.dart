@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quran_app/model/surah.dart';
 
 class SurahTab extends StatelessWidget {
@@ -31,9 +31,18 @@ class SurahTab extends StatelessWidget {
   }
   
   Container _surahItem({required Surah surah}) => Container(
-    child: Text(
-      'Al-Fatihah',
-      style: GoogleFonts.poppins(color: Colors.black),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: Row(
+        children: [
+          Stack(
+            children: [
+              SvgPicture.asset('assets/svg/nomor_surah.svg'),
+              Text(surah.nomor.toString()),
+            ],
+          ),
+        ],
+      ),
     )
   );
 }
